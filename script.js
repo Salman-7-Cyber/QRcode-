@@ -1,6 +1,7 @@
 function toEnglishNumbers(str) {
   return str.replace(/[٠-٩]/g, d => "٠١٢٣٤٥٦٧٨٩".indexOf(d));
 }
+
 document.getElementById('excelFile').addEventListener('change', function (e) {
   const file = e.target.files[0];
   const reader = new FileReader();
@@ -10,16 +11,17 @@ document.getElementById('excelFile').addEventListener('change', function (e) {
     const sheet = workbook.Sheets[workbook.SheetNames[0]];
     const json = XLSX.utils.sheet_to_json(sheet, { header: 1 });
     let lines = [];
-    const header = json[0];
 
+    const header = json[0];
     const passportIndex = header.findIndex(h => /رقم\s?الجواز/i.test(h));
     const nameIndex = header.findIndex(h => /اسم\s?الحاج/i.test(h));
 
     for (let i = 1; i < json.length; i++) {
       const row = json[i];
-      const passport = row[passportIndex]?.trim();
-      const name = row[nameIndex]?.trim() || "-";
-      if (passport && /[A-Za-z]/.test(passport)) {
+      const passport = row[passportIndex]?.toString().trim();
+      const name = row[nameIndex]?.toString().trim() || "-";
+
+      if (passport && /[A-Za-z]/.test(passport) && /\d/.test(passport)) {
         lines.push(`${passport}, ${name}`);
       }
     }
@@ -42,7 +44,7 @@ function generateTable() {
 
   const cleaned = input.map(line => {
     const parts = line.split(",");
-    const passport = parts.find(p => /[A-Za-z]/.test(p))?.trim() || "";
+    const passport = parts.find(p => /[A-Za-z]/.test(p) && /\d/.test(p))?.trim() || "";
     const name = parts.find(p => /^[^0-9]*$/.test(p?.trim()))?.trim() || "-";
     return { passport, name };
   }).filter(e => e.passport);
@@ -61,7 +63,7 @@ function generateTable() {
     td1.textContent = toEnglishNumbers((i + 1).toString());
 
     const td2 = document.createElement("td");
-    td2.textContent = item.passport;
+    td2.textContent = toEnglishNumbers(item.passport);
     td2.style.fontWeight = "bold";
 
     const td3 = document.createElement("td");
@@ -75,7 +77,7 @@ function generateTable() {
 
     const td6 = document.createElement("td");
     const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-JsBarcode(svg, toEnglishNumbers(item.passport), {
+    JsBarcode(svg, toEnglishNumbers(item.passport), {
       format: "CODE128",
       lineColor: "#000",
       width: 2,
