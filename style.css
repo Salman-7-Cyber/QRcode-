@@ -1,32 +1,3 @@
-@media print {
-  body * {
-    display: none !important;
-  }
-
-  table,
-  table * {
-    display: table !important;
-    visibility: visible !important;
-  }
-
-  table {
-    position: absolute;
-    top: 0;
-    right: 0;
-    left: 0;
-    width: 100%;
-  }
-
-  thead {
-    display: table-header-group !important;
-  }
-
-  tr {
-    page-break-inside: avoid;
-  }
-}
-
-
 :root {
   --bg-light: #ffffff;
   --bg-dark: #1e3a8a;
@@ -163,3 +134,33 @@ svg.barcode {
   font-size: 14px;
   color: var(--text-light);
 }
+
+
+@media print {
+  body * {
+    display: none !important;
+  }
+
+  table,
+  table * {
+    display: table !important;
+    visibility: visible !important;
+  }
+
+  table {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    width: 100%;
+  }
+
+  thead {
+    display: table-header-group !important;
+  }
+
+  tr {
+    page-break-inside: avoid;
+  }
+}
+
