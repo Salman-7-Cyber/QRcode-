@@ -58,7 +58,7 @@ function generateTable() {
     }
 
     const td1 = document.createElement("td");
-    td1.textContent = i + 1;
+    td1.textContent = toEnglishNumbers((i + 1).toString());
 
     const td2 = document.createElement("td");
     td2.textContent = item.passport;
