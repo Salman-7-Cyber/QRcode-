@@ -1,10 +1,12 @@
 @media print {
   body * {
-    visibility: hidden;
+    display: none !important;
   }
 
-  table, table * {
-    visibility: visible;
+  table,
+  table * {
+    display: table !important;
+    visibility: visible !important;
   }
 
   table {
@@ -12,9 +14,17 @@
     top: 0;
     right: 0;
     left: 0;
+    width: 100%;
+  }
+
+  thead {
+    display: table-header-group !important;
+  }
+
+  tr {
+    page-break-inside: avoid;
   }
 }
-
 
 
 :root {
