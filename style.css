@@ -141,25 +141,24 @@ svg.barcode {
     display: none !important;
   }
 
-  table,
-  table * {
-    display: table !important;
+  #print-section,
+  #print-section * {
+    display: block !important;
     visibility: visible !important;
   }
 
-  table {
-    position: absolute;
-    top: 0;
-    right: 0;
-    left: 0;
+  #print-section table {
     width: 100%;
+    border-collapse: collapse;
   }
 
-  thead {
-    display: table-header-group !important;
+  #print-section th,
+  #print-section td {
+    border: 1px solid #ccc;
+    padding: 10px;
   }
 
-  tr {
+  #print-section tr {
     page-break-inside: avoid;
   }
 }
