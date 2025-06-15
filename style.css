@@ -135,7 +135,40 @@ svg.barcode {
   color: var(--text-light);
 }
 
+}
+/* ✅ تصميم جدول الباركود مثل الشكل الاحترافي */
+#print-section table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 15px; /* مسافة بين الصفوف */
+  font-family: 'Segoe UI', sans-serif;
+}
 
+#print-section th {
+  background-color: #1e3a8a;  /* رأس الجدول - أزرق غامق */
+  color: white;
+  padding: 12px;
+  font-size: 16px;
+  text-align: center;
+  border-radius: 10px 10px 0 0;
+}
+
+#print-section td {
+  background-color: #f8fafc;  /* خلفية الصفوف */
+  padding: 16px 10px;
+  text-align: center;
+  font-size: 16px;
+  border-radius: 10px;
+  font-weight: 500;
+}
+
+svg.barcode {
+  display: block;
+  margin: 0 auto;
+  margin-top: 5px;
+}
+
+/* ✅ طباعة: الجدول فقط بدون أي شيء آخر */
 @media print {
   body * {
     display: none !important;
@@ -149,16 +182,15 @@ svg.barcode {
 
   #print-section table {
     width: 100%;
-    border-collapse: collapse;
+    border-collapse: separate;
+    border-spacing: 0 15px;
   }
 
   #print-section th,
   #print-section td {
-    border: 1px solid #ccc;
-    padding: 10px;
-  }
-
-  #print-section tr {
-    page-break-inside: avoid;
+    background: white !important;
+    color: black !important;
+    padding: 12px !important;
   }
 }
+
