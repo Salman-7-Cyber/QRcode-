@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>QRcode</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+</head>
+<body data-theme="light">
+  <button class="toggle-theme" onclick="toggleTheme()">🌓 تبديل الوضع</button>
+  <h1>QRcode</h1>
+
+  <div class="input-section">
+    <textarea id="inputArea" placeholder="أدخل الجوازات أو حمّل ملف إكسل"></textarea>
+    <input type="file" id="excelFile" accept=".xlsx, .xls, .csv" />
+    
+    <div class="filters">
+      <select id="nationality" placeholder="الجنسية" list="nationality-options">
+        <option value="" disabled selected>اختر أو اكتب الجنسية</option>
+        <option>بنجلاديش</option>
+        <option>كوت ديفوار</option>
+        <option>نيجيريا</option>
+        <option>المالديف</option>
+        <option>الكاميرون</option>
+        <option>ساحل العاج</option>
+        <option>اندونيسيا</option>
+        <option>المغرب</option>
+      </select>
+
+      <select id="center">
+        <option value="" disabled selected>اختر المركز</option>
+        <option>بنجلاديش 1</option>
+        <option>بنجلاديش 2</option>
+        <option>بنجلاديش 3</option>
+        <option>بنجلاديش 4</option>
+        <option>بنجلاديش 5</option>
+        <option>بنجلاديش 6</option>
+        <option>ضيافة العالم 1</option>
+        <option>ضيافة العالم 2</option>
+        <option>ضيافة العالم 4</option>
+        <option>نيجيريا 1</option>
+        <option>نيجيريا 2</option>
+        <option>نيجيريا 3</option>
+        <option>اندونيسيا 1</option>
+        <option>اندونيسيا 2</option>
+        <option>اندونيسيا 3</option>
+        <option>اندونيسيا 4</option>
+        <option>اندونيسيا 122</option>
+        <option>المغرب 1</option>
+        <option>المغرب 2</option>
+        <option>المغرب 3</option>
+        <option>المغرب 4</option>
+        <option>المغرب 5</option>
+        <option>المغرب 6</option>
+        <option>المغرب 7</option>
+        <option>المغرب 8</option>
+        <option>المغرب 9</option>
+        <option>المغرب 10</option>
+        <option>المغرب 11</option>
+      </select>
+    </div>
+
+    <div class="actions">
+      <button onclick="generateTable()">📥 توليد الجدول</button>
+      <button onclick="exportToExcel()">📤 تصدير Excel</button>
+      <button onclick="exportToPDF()">📄 تصدير PDF</button>
+      <button onclick="window.print()">🖨️ طباعة</button>
+      <button onclick="clearAll()">🗑️ مسح الكل</button>
+    </div>
+  </div>
+
+  <div class="stats" id="stats"></div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>رقم</th>
+        <th>رقم الجواز</th>
+        <th>الاسم</th>
+        <th>الجنسية</th>
+        <th>المركز</th>
+        <th>الباركود</th>
+      </tr>
+    </thead>
+    <tbody id="passport-table"></tbody>
+  </table>
+
+  <div class="footer" id="footer-info"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
