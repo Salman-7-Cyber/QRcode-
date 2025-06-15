@@ -1,3 +1,6 @@
+function toEnglishNumbers(str) {
+  return str.replace(/[٠-٩]/g, d => "٠١٢٣٤٥٦٧٨٩".indexOf(d));
+}
 document.getElementById('excelFile').addEventListener('change', function (e) {
   const file = e.target.files[0];
   const reader = new FileReader();
@@ -72,7 +75,7 @@ function generateTable() {
 
     const td6 = document.createElement("td");
     const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-    JsBarcode(svg, item.passport, {
+JsBarcode(svg, toEnglishNumbers(item.passport), {
       format: "CODE128",
       lineColor: "#000",
       width: 2,
