@@ -1,58 +1,45 @@
 :root {
   --bg: #ffffff;
   --text: #1e293b;
-  --header: #1e3a8a;
-  --button: #1e3a8a;
-  --hover: #475569;
-  --row: #f1f5f9;
-  --orange: #f97316;
+  --main: #1e3a8a;
+  --highlight: #f97316;
 }
 
 [data-theme="dark"] {
-  --bg: #0f172a;
+  --bg: #1e3a8a;
   --text: #ffffff;
-  --header: #60a5fa;
-  --button: #2563eb;
-  --hover: #1e40af;
-  --row: #1e293b;
+  --main: #f1f5f9;
+  --highlight: #f97316;
 }
 
 body {
-  direction: rtl;
-  background: var(--bg);
+  background-color: var(--bg);
   color: var(--text);
   font-family: 'Segoe UI', sans-serif;
   padding: 20px;
 }
 
-h1 {
-  text-align: center;
-  color: var(--header);
-}
-
-textarea, select, input[type="file"] {
+textarea, input {
   width: 100%;
   margin-bottom: 10px;
-  font-size: 16px;
   padding: 10px;
-  border: 1px solid var(--header);
-  border-radius: 8px;
-  background: var(--row);
-  color: var(--text);
+  font-size: 16px;
+}
+
+.filters {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
 }
 
 button {
-  background: var(--button);
+  padding: 10px 20px;
+  margin-right: 10px;
+  cursor: pointer;
+  background-color: var(--main);
   color: white;
   border: none;
-  padding: 10px 20px;
-  margin: 5px;
   border-radius: 6px;
-  cursor: pointer;
-}
-
-button:hover {
-  background: var(--hover);
 }
 
 table {
@@ -62,40 +49,25 @@ table {
 }
 
 th, td {
-  padding: 10px;
   border: 1px solid #ccc;
+  padding: 10px;
   text-align: center;
 }
 
 tr.duplicate {
-  background: var(--orange);
-}
-
-.top-bar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.selectors {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
+  background-color: var(--highlight);
 }
 
 @media print {
   body * {
     display: none;
   }
-
-  #print-section,
-  #print-section * {
+  #print-section, #print-section * {
     display: block;
   }
-
   #print-section {
     position: absolute;
     top: 0;
-    width: 100%;
+    left: 0;
   }
 }
