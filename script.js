@@ -86,3 +86,15 @@ function clearAll() {
   document.getElementById("inputArea").value = "";
   document.getElementById("passport-table").innerHTML = "";
 }
+document.addEventListener("DOMContentLoaded", () => {
+  const themeBtn = document.getElementById("themeToggle");
+  if (themeBtn) {
+    themeBtn.addEventListener("click", toggleTheme);
+  }
+
+  const printBtn = document.getElementById("printBtn");
+  if (printBtn) {
+    printBtn.addEventListener("click", printTable);
+  }
+});
+
