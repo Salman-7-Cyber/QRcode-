@@ -1,45 +1,34 @@
-function toggleTheme() {
-  const theme = document.body.getAttribute('data-theme');
-  document.body.setAttribute('data-theme', theme === 'dark' ? 'light' : 'dark');
-}
-
-document.getElementById('excelFile').addEventListener('change', function (e) {
-  const reader = new FileReader();
-  reader.onload = function (e) {
-    const data = new Uint8Array(e.target.result);
-    const workbook = XLSX.read(data, { type: 'array' });
-    const sheet = workbook.Sheets[workbook.SheetNames[0]];
-    const rows = XLSX.utils.sheet_to_json(sheet, { header: 1 });
-    const input = [];
-
-    rows.forEach(row => {
-      const passport = row.find(cell => typeof cell === 'string' && /[A-Za-z]/.test(cell) && /\d/.test(cell));
-      const name = row.find(cell => typeof cell === 'string' && /^[A-Za-z\s\u0600-\u06FF]+$/.test(cell) && !/\d/.test(cell));
-      if (passport) input.push(`${passport},${name || ''}`);
-    });
-
-    document.getElementById('inputArea').value = input.join("\n");
-  };
-  reader.readAsArrayBuffer(e.target.files[0]);
+document.addEventListener("DOMContentLoaded", () => {
+  document.getElementById("themeToggle").addEventListener("click", toggleTheme);
+  document.getElementById("printBtn").addEventListener("click", () => window.print());
+  document.getElementById("excelFile").addEventListener("change", handleExcelUpload);
 });
 
+function toggleTheme() {
+  const theme = document.body.getAttribute("data-theme");
+  document.body.setAttribute("data-theme", theme === "dark" ? "light" : "dark");
+}
+
 function generateTable() {
+  const input = document.getElementById("inputArea").value.trim().split("\n");
+  const nationality = document.getElementById("nationalityInput").value || "-";
+  const center = document.getElementById("centerInput").value || "-";
   const table = document.getElementById("passport-table");
   table.innerHTML = "";
-  const lines = document.getElementById("inputArea").value.trim().split("\n");
-  const nationality = document.getElementById("nationality").value || "-";
-  const center = document.getElementById("center").value || "-";
+
   const seen = new Set();
 
-  lines.forEach((line, i) => {
-    const parts = line.split(",");
-    const passport = parts[0]?.trim() || "";
-    const name = parts[1]?.trim() || "-";
+  input.forEach((line, i) => {
+    const parts = line.trim().split(/[\s,،]+/);
+    const passport = parts.find(p => /[A-Za-z]/.test(p) && /\d/.test(p)) || "";
+    const name = parts.find(p => /^[\u0600-\u06FFa-zA-Z\s]+$/.test(p) && !/\d/.test(p)) || "-";
     if (!passport) return;
 
-    const tr = document.createElement("tr");
-    if (seen.has(passport)) tr.classList.add("duplicate");
+    const isDuplicate = seen.has(passport);
     seen.add(passport);
+
+    const tr = document.createElement("tr");
+    if (isDuplicate) tr.classList.add("duplicate");
 
     tr.innerHTML = `
       <td>${i + 1}</td>
@@ -47,54 +36,35 @@ function generateTable() {
       <td>${name}</td>
       <td>${nationality}</td>
       <td>${center}</td>
-      <td><svg id="barcode-${i}"></svg></td>
+      <td><svg class="barcode"></svg></td>
     `;
     table.appendChild(tr);
-    JsBarcode(`#barcode-${i}`, passport, {
+
+    JsBarcode(tr.querySelector("svg.barcode"), passport, {
       format: "CODE128",
-      lineColor: "#000",
-      width: 2,
-      height: 40,
-      displayValue: true
+      displayValue: true,
+      fontSize: 16,
+      height: 60
     });
   });
 }
 
-function printTable() {
-  const original = document.body.innerHTML;
-  const printContent = document.getElementById("print-section").innerHTML;
-  document.body.innerHTML = printContent;
-  window.print();
-  location.reload();
+function handleExcelUpload(e) {
+  const file = e.target.files[0];
+  const reader = new FileReader();
+  reader.onload = (evt) => {
+    const data = new Uint8Array(evt.target.result);
+    const workbook = XLSX.read(data, { type: 'array' });
+    const sheet = workbook.Sheets[workbook.SheetNames[0]];
+    const rows = XLSX.utils.sheet_to_json(sheet, { header: 1 });
+
+    const lines = [];
+    for (let row of rows) {
+      let passport = row.find(cell => typeof cell === 'string' && /[A-Za-z]/.test(cell) && /\d/.test(cell));
+      let name = row.find(cell => typeof cell === 'string' && /^[\u0600-\u06FFa-zA-Z\s]+$/.test(cell) && !/\d/.test(cell));
+      if (passport) lines.push(`${passport}, ${name || ''}`);
+    }
+    document.getElementById("inputArea").value = lines.join("\n");
+  };
+  reader.readAsArrayBuffer(file);
 }
-
-function exportToExcel() {
-  const rows = [["رقم", "رقم الجواز", "الاسم", "الجنسية", "المركز"]];
-  document.querySelectorAll("#passport-table tr").forEach(row => {
-    const data = [...row.children].map(td => td.innerText.trim());
-    data.pop(); // remove barcode
-    rows.push(data);
-  });
-
-  const ws = XLSX.utils.aoa_to_sheet(rows);
-  const wb = XLSX.utils.book_new();
-  XLSX.utils.book_append_sheet(wb, ws, "QR");
-  XLSX.writeFile(wb, "qr_passports.xlsx");
-}
-
-function clearAll() {
-  document.getElementById("inputArea").value = "";
-  document.getElementById("passport-table").innerHTML = "";
-}
-document.addEventListener("DOMContentLoaded", () => {
-  const themeBtn = document.getElementById("themeToggle");
-  if (themeBtn) {
-    themeBtn.addEventListener("click", toggleTheme);
-  }
-
-  const printBtn = document.getElementById("printBtn");
-  if (printBtn) {
-    printBtn.addEventListener("click", printTable);
-  }
-});
-
