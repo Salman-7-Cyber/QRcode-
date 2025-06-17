@@ -8,3 +8,33 @@ body {
 }
 
 
+header h1 {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+header .spacer {
+  width: 40px; /* لتوازن التصميم */
+}
+
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: #0d47a1;
+  color: white;
+}
+
+#themeToggle {
+  padding: 10px 15px;
+  border: none;
+  background-color: #ffffff33;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
