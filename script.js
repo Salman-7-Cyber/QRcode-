@@ -1,22 +1,26 @@
-body {
-  font-family: Arial, sans-serif;
-  text-align: center;
-  margin-top: 50px;
-  background-color: #f5f5f5;
-  color: #333;
+function isValidPassport(passport) {
+  const hasLetters = /[A-Za-z]/.test(passport);
+  const hasNumbers = /\d/.test(passport);
+  const isValidFormat = /^[A-Za-z0-9]+$/.test(passport);
+  return hasLetters && hasNumbers && isValidFormat;
 }
 
-input, button {
-  padding: 10px;
-  font-size: 16px;
-  margin: 10px;
-}
+function generateBarcode() {
+  const input = document.getElementById("passportInput").value.trim();
+  const error = document.getElementById("errorMsg");
+  const barcodeDiv = document.getElementById("barcode");
+  barcodeDiv.innerHTML = "";
+  error.textContent = "";
 
-#errorMsg {
-  color: red;
-  margin: 10px 0;
-}
+  if (!isValidPassport(input)) {
+    error.textContent = "رقم الجواز يجب أن يحتوي على أرقام وحروف فقط.";
+    return;
+  }
 
-#barcode {
-  margin-top: 20px;
+  const svg = document.createElement("svg");
+  JsBarcode(svg, input, {
+    format: "CODE128",
+    displayValue: true
+  });
+  barcodeDiv.appendChild(svg);
 }
