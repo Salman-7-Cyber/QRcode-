@@ -3,72 +3,50 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title> QRcode </title>
+  <title>Passport QR Generator</title>
   <link rel="stylesheet" href="style.css" />
 </head>
-
 <body data-theme="light">
-<!-- داخل البودي وقبل سكربتك مباشرة -->
-<script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
-<script src="script.js"></script>
 
-<header>
-  <div class="spacer"></div>
-  <h1> QRcode </h1>
-  <button id="themeToggle">🌙</button>
-</header>
+  <header>
+    <div class="spacer"></div>
+    <h1>QRcode</h1>
+    <button id="themeToggle">🌙</button>
+  </header>
 
-  
-  <label>الجنسية:</label>
-<select id="nationality" required>
-  <option value="">اختر الجنسية</option>
-  <option value="بنجلادش">بنجلادش</option>
-  <option value="الكاميرون">الكاميرون</option>
-  <option value="المغرب">المغرب</option>
-  <option value="ساحل العاج">ساحل العاج</option>
-  <option value="اندونيسيا">اندونيسيا</option>
-  <option value="نيجيريا">نيجيريا</option>
-  <option value="المالديف">المالديف</option>
-  <option value="كوت ديفوار">كوت ديفوار</option>
-</select>
-  
-<section id="manual-input">
-  <h2>Manual Entry</h2>
-  <form id="manualForm">
-  <label>اسم الحاج:</label>
-  <input type="text" id="name" placeholder="مثال: Mohammed Ali" required>
+  <section id="manual-input">
+    <h2>Manual Entry</h2>
+    <form id="manualForm">
+      <label>Full Name:</label>
+      <input type="text" id="name" placeholder="Example: Mohammed Ali" required />
 
-  <label>رقم الجواز:</label>
-  <input type="text" id="passport" placeholder="AB123456" required>
+      <label>Passport Number:</label>
+      <input type="text" id="passport" placeholder="AB123456" required />
 
-  <label>الجنسية:</label>
-  <!-- الجنسية محطوطة مسبقًا فوق، فإما تنقلها هنا أو تخليها مرتبطة -->
+      <label>Nationality:</label>
+      <select id="nationality" required>
+        <option value="">اختر الجنسية</option>
+        <option value="بنجلادش">بنجلادش</option>
+        <option value="الكاميرون">الكاميرون</option>
+        <option value="المغرب">المغرب</option>
+        <option value="ساحل العاج">ساحل العاج</option>
+        <option value="اندونيسيا">اندونيسيا</option>
+        <option value="نيجيريا">نيجيريا</option>
+        <option value="المالديف">المالديف</option>
+        <option value="كوت ديفوار">كوت ديفوار</option>
+      </select>
 
-  <button type="submit">تحقق وتوليد باركود</button>
-</form>
+      <button type="submit">تحقق وتوليد باركود</button>
+    </form>
+    <p id="manualMessage"></p>
+  </section>
 
-<p id="manualMessage"></p>
+  <section id="barcode-section">
+    <h2>Generated Barcode</h2>
+    <svg id="barcode"></svg>
+  </section>
 
-</section>
-
-<section id="excel-upload">
-  <h2>Upload Excel File</h2>
-</section>
-
-<section id="data-table">
-  <h2>Data Table</h2>
-</section>
-
-<section id="barcode-section">
-  <h2>Generated Barcode</h2>
-  <svg id="barcode"></svg>
-</section>
-
-<section id="export-section">
-  <h2>Export / Print</h2>
-</section>
-
-<script src="script.js"></script>
-
+  <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
