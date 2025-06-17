@@ -1,48 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Passport QR Generator</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <title>   QRcode </title>
+  <link rel="stylesheet" href="style.css">
 </head>
-<body data-theme="light">
-
+<body>
   <header>
-    <div class="spacer"></div>
-    <h1>QRcode</h1>
-    <button id="themeToggle">🌙</button>
+    <h1>م QRcode </h1>
   </header>
 
-  <section id="manual-input">
-    <h2>Manual Entry</h2>
-    <form id="manualForm">
-      <label>Passport Number:</label>
-      <input type="text" id="passport" placeholder="AB123456" required />
+  <main>
+    <input type="text" id="passportInput" placeholder="ادخل رقم الجواز">
+    <button onclick="generateBarcode()">إنشاء باركود</button>
+    <p id="errorMsg"></p>
+    <div id="barcode"></div>
+  </main>
 
-      <button type="submit">تحقق وتوليد باركود</button>
-    </form>
-    <p id="manualMessage"></p>
-  </section>
-
-  <section id="barcode-section">
-    <h2>Generated Barcode</h2>
-    <svg id="barcode"></svg>
-  </section>
-
-  <section id="excel-upload">
-    <h2>Upload Excel File</h2>
-  </section>
-
-  <section id="data-table">
-    <h2>Data Table</h2>
-  </section>
-
-  <section id="export-section">
-    <h2>Export / Print</h2>
-  </section>
-
-  <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/jsbarcode/3.11.5/JsBarcode.all.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
