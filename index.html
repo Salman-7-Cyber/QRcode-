@@ -1,94 +1,39 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>QRcode</title>
+  <title> QRcode </title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body data-theme="light">
+  
+<header>
+  <h1> QRcode </h1>
+  <button id="themeToggle">🌙 Toggle Theme</button>
+</header>
+  
+<section id="manual-input">
+  <h2>Manual Entry</h2>
+</section>
 
-  <div class="top-bar">
-    <h1>QRcode</h1>
-    <button id="themeToggle">🌓 الوضع</button>
-    <button id="printBtn">🖨️ طباعة</button>
-  </div>
+<section id="excel-upload">
+  <h2>Upload Excel File</h2>
+</section>
 
-  <div class="input-section">
-    <textarea id="inputArea" placeholder="أدخل البيانات هنا..."></textarea>
-    <input type="file" id="excelFile" accept=".xlsx, .xls, .csv" />
+<section id="data-table">
+  <h2>Data Table</h2>
+</section>
 
-    <div class="selectors">
-      <select id="nationality">
-        <option value="">اختر الجنسية أو اكتب</option>
-        <option>بنجلادش</option>
-        <option>كوت ديفوار</option>
-        <option>نيجيريا</option>
-        <option>المالديف</option>
-        <option>الكاميرون</option>
-        <option>ساحل العاج</option>
-        <option>اندونيسيا</option>
-        <option>المغرب</option>
-      </select>
+<section id="barcode-section">
+  <h2>Generated Barcode</h2>
+</section>
 
-      <select id="center">
-        <option value="">اختر المركز</option>
-        <option>بنجلادش 1</option>
-        <option>بنجلادش 2</option>
-        <option>بنجلادش 3</option>
-        <option>بنجلادش 4</option>
-        <option>بنجلادش 5</option>
-        <option>بنجلادش 6</option>
-        <option>نيجيريا 1</option>
-        <option>نيجيريا 2</option>
-        <option>نيجيريا 3</option>
-        <option>ضيافة العالم 1</option>
-        <option>ضيافة العالم 2</option>
-        <option>ضيافة العالم 4</option>
-        <option>اندونيسيا 1</option>
-        <option>اندونيسيا 2</option>
-        <option>اندونيسيا 3</option>
-        <option>اندونيسيا 4</option>
-        <option>اندونيسيا 122</option>
-        <option>المغرب 1</option>
-        <option>المغرب 2</option>
-        <option>المغرب 3</option>
-        <option>المغرب 4</option>
-        <option>المغرب 5</option>
-        <option>المغرب 6</option>
-        <option>المغرب 7</option>
-        <option>المغرب 8</option>
-        <option>المغرب 9</option>
-        <option>المغرب 10</option>
-        <option>المغرب 11</option>
-      </select>
-    </div>
+<section id="export-section">
+  <h2>Export / Print</h2>
+</section>
 
-    <div class="buttons">
-      <button onclick="generateTable()">توليد الجدول</button>
-      <button onclick="exportToExcel()">📥 تصدير Excel</button>
-      <button onclick="clearAll()">🧹 مسح الكل</button>
-    </div>
-  </div>
+<script src="script.js"></script>
 
-  <div id="print-section">
-    <table>
-      <thead>
-        <tr>
-          <th>رقم</th>
-          <th>رقم الجواز</th>
-          <th>الاسم</th>
-          <th>الجنسية</th>
-          <th>المركز</th>
-          <th>الباركود</th>
-        </tr>
-      </thead>
-      <tbody id="passport-table"></tbody>
-    </table>
-  </div>
-
-  <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
-  <script src="script.js" defer></script>
 </body>
 </html>
