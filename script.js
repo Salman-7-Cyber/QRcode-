@@ -30,3 +30,16 @@ document.getElementById("manualForm").addEventListener("submit", function (e) {
   message.textContent = "✅ البيانات صحيحة! جاهز لتوليد الباركود.";
   message.style.color = "green";
 });
+
+// ✅ إذا جميع الشروط متحققة
+message.textContent = "✅ البيانات صحيحة! تم توليد الباركود.";
+message.style.color = "green";
+
+// توليد الباركود باستخدام رقم الجواز
+JsBarcode("#barcode", passport, {
+  format: "CODE128",
+  lineColor: "#000",
+  width: 2,
+  height: 60,
+  displayValue: true
+});
