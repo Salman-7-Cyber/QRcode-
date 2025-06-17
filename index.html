@@ -6,9 +6,11 @@
   <title> QRcode </title>
   <link rel="stylesheet" href="style.css" />
 </head>
-  <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
 
 <body data-theme="light">
+<!-- داخل البودي وقبل سكربتك مباشرة -->
+<script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
+<script src="script.js"></script>
 
   <label>الجنسية:</label>
 <select id="nationality" required>
@@ -31,6 +33,21 @@
   
 <section id="manual-input">
   <h2>Manual Entry</h2>
+  <form id="manualForm">
+  <label>اسم الحاج:</label>
+  <input type="text" id="name" placeholder="مثال: Mohammed Ali" required>
+
+  <label>رقم الجواز:</label>
+  <input type="text" id="passport" placeholder="AB123456" required>
+
+  <label>الجنسية:</label>
+  <!-- الجنسية محطوطة مسبقًا فوق، فإما تنقلها هنا أو تخليها مرتبطة -->
+
+  <button type="submit">تحقق وتوليد باركود</button>
+</form>
+
+<p id="manualMessage"></p>
+
 </section>
 
 <section id="excel-upload">
