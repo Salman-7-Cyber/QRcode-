@@ -6,7 +6,22 @@
   <title> QRcode </title>
   <link rel="stylesheet" href="style.css" />
 </head>
+  <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
+
 <body data-theme="light">
+
+  <label>الجنسية:</label>
+<select id="nationality" required>
+  <option value="">اختر الجنسية</option>
+  <option value="بنجلادش">بنجلادش</option>
+  <option value="الكاميرون">الكاميرون</option>
+  <option value="المغرب">المغرب</option>
+  <option value="ساحل العاج">ساحل العاج</option>
+  <option value="اندونيسيا">اندونيسيا</option>
+  <option value="نيجيريا">نيجيريا</option>
+  <option value="المالديف">المالديف</option>
+  <option value="كوت ديفوار">كوت ديفوار</option>
+</select>
   
 <header>
   <div class="spacer"></div>
@@ -28,6 +43,7 @@
 
 <section id="barcode-section">
   <h2>Generated Barcode</h2>
+  <svg id="barcode"></svg>
 </section>
 
 <section id="export-section">
