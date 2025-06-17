@@ -1,3 +1,10 @@
+// زر تغيير الثيم
+document.getElementById("themeToggle").addEventListener("click", function () {
+  const theme = document.body.getAttribute("data-theme");
+  document.body.setAttribute("data-theme", theme === "dark" ? "light" : "dark");
+});
+
+// التحقق من النموذج وتوليد الباركود
 document.getElementById("manualForm").addEventListener("submit", function (e) {
   e.preventDefault();
 
@@ -5,10 +12,10 @@ document.getElementById("manualForm").addEventListener("submit", function (e) {
   const passport = document.getElementById("passport").value.trim();
   const message = document.getElementById("manualMessage");
 
-  // ✅ شرط الاسم: فقط حروف إنجليزية
+  // شرط الاسم: حروف إنجليزية فقط
   const nameRegex = /^[A-Za-z\s]+$/;
 
-  // ✅ شرط الجواز: يحتوي على حروف وأرقام إنجليزية معًا
+  // شرط الجواز: حروف وأرقام معًا فقط
   const hasLetters = /[A-Za-z]/.test(passport);
   const hasNumbers = /[0-9]/.test(passport);
   const passportRegex = /^[A-Za-z0-9]+$/;
@@ -26,11 +33,10 @@ document.getElementById("manualForm").addEventListener("submit", function (e) {
     return;
   }
 
-  // ✅ إذا جميع الشروط متحققة
+  // إذا الشروط صحيحة
   message.textContent = "✅ البيانات صحيحة! تم توليد الباركود.";
   message.style.color = "green";
 
-  // توليد الباركود باستخدام رقم الجواز
   JsBarcode("#barcode", passport, {
     format: "CODE128",
     lineColor: "#000",
