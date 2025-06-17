@@ -21,11 +21,11 @@ document.getElementById("manualForm").addEventListener("submit", function (e) {
   const passportRegex = /^[A-Za-z0-9]+$/;
   const passportValid = hasLetters && hasNumbers && passportRegex.test(passport);
 
-  if (!nameRegex.test(name)) {
-    message.textContent = "❌ الاسم يجب أن يحتوي على حروف إنجليزية فقط بدون أرقام أو رموز.";
-    message.style.color = "red";
-    return;
-  }
+if (name !== "" && !nameRegex.test(name)) {
+  message.textContent = "❌ الاسم يجب أن يحتوي على حروف إنجليزية فقط بدون أرقام أو رموز.";
+  message.style.color = "red";
+  return;
+}
 
   if (!passportValid) {
     message.textContent = "❌ رقم الجواز يجب أن يحتوي على حروف وأرقام إنجليزية فقط.";
