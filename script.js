@@ -1,30 +1,32 @@
-// أول شيء: نجيب الزر من الصفحة
-const themeToggle = document.getElementById("themeToggle");
+document.getElementById("manualForm").addEventListener("submit", function (e) {
+  e.preventDefault();
 
-// نضيف "حدث" عند الضغط على الزر
-themeToggle.addEventListener("click", function () {
-  // نقرأ القيمة الحالية للثيم من الـ body
-  const currentTheme = document.body.getAttribute("data-theme");
+  const name = document.getElementById("name").value.trim();
+  const passport = document.getElementById("passport").value.trim();
+  const message = document.getElementById("manualMessage");
 
-  // إذا الوضع الحالي "light"، نخليه "dark"، والعكس صحيح
-  if (currentTheme === "light") {
-    document.body.setAttribute("data-theme", "dark");
-  } else {
-    document.body.setAttribute("data-theme", "light");
+  // ✅ شرط الاسم: فقط حروف إنجليزية
+  const nameRegex = /^[A-Za-z\s]+$/;
+
+  // ✅ شرط الجواز: يحتوي على حروف وأرقام إنجليزية معًا
+  const hasLetters = /[A-Za-z]/.test(passport);
+  const hasNumbers = /[0-9]/.test(passport);
+  const passportRegex = /^[A-Za-z0-9]+$/;
+  const passportValid = hasLetters && hasNumbers && passportRegex.test(passport);
+
+  if (!nameRegex.test(name)) {
+    message.textContent = "❌ الاسم يجب أن يحتوي على حروف إنجليزية فقط بدون أرقام أو رموز.";
+    message.style.color = "red";
+    return;
   }
+
+  if (!passportValid) {
+    message.textContent = "❌ رقم الجواز يجب أن يحتوي على حروف وأرقام إنجليزية فقط.";
+    message.style.color = "red";
+    return;
+  }
+
+  // ✅ إذا جميع الشروط متحققة
+  message.textContent = "✅ البيانات صحيحة! جاهز لتوليد الباركود.";
+  message.style.color = "green";
 });
-
-/* الوضع الليلي */
-body[data-theme="dark"] {
-  background-color: #121212;
-  color: #f0f0f0;
-}
-
-body[data-theme="dark"] header {
-  background-color: #1e1e1e;
-}
-
-body[data-theme="dark"] #themeToggle {
-  background-color: #333;
-  color: #f0f0f0;
-}
