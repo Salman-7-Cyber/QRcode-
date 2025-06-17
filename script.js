@@ -1,10 +1,10 @@
-// زر تغيير الثيم
+// زر تغيير الوضع الليلي
 document.getElementById("themeToggle").addEventListener("click", function () {
   const theme = document.body.getAttribute("data-theme");
   document.body.setAttribute("data-theme", theme === "dark" ? "light" : "dark");
 });
 
-// التحقق من النموذج وتوليد الباركود
+// التحقق من البيانات وتوليد الباركود
 document.getElementById("manualForm").addEventListener("submit", function (e) {
   e.preventDefault();
 
@@ -12,10 +12,10 @@ document.getElementById("manualForm").addEventListener("submit", function (e) {
   const passport = document.getElementById("passport").value.trim();
   const message = document.getElementById("manualMessage");
 
-  // شرط الاسم: حروف إنجليزية فقط
+  // شرط الاسم: فقط حروف إنجليزية
   const nameRegex = /^[A-Za-z\s]+$/;
 
-  // شرط الجواز: حروف وأرقام معًا فقط
+  // شرط الجواز: يحتوي على حروف وأرقام إنجليزية فقط
   const hasLetters = /[A-Za-z]/.test(passport);
   const hasNumbers = /[0-9]/.test(passport);
   const passportRegex = /^[A-Za-z0-9]+$/;
@@ -33,7 +33,7 @@ document.getElementById("manualForm").addEventListener("submit", function (e) {
     return;
   }
 
-  // إذا الشروط صحيحة
+  // ✅ الشروط متحققة – توليد الباركود
   message.textContent = "✅ البيانات صحيحة! تم توليد الباركود.";
   message.style.color = "green";
 
